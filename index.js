@@ -44,6 +44,7 @@ async function resizeAndConvertToWebP(
 async function processImagesInDirectory(inputDir, outputDir, width, height) {
   const files = await fs.readdir(inputDir);
   for (const file of files) {
+    if(file.includes("DS")) continue
     const inputImagePath = path.join(inputDir, file);
     const outputImagePath = path.join(outputDir, path.parse(file).name + ".webp");
 
