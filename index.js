@@ -7,7 +7,6 @@ async function resizeAndConvertToWebP(
   inputImagePath,
   outputImagePath,
   width,
-  height
 ) {
 
   console.time("convertImage" + inputImagePath);
@@ -15,6 +14,12 @@ async function resizeAndConvertToWebP(
   const file = await fs.readFile(inputImagePath)
   const image = imagePool.ingestImage(file);
   await image.decoded; // Wait for the image to be decoded
+
+  // check image size
+
+  const { width: originalWidth, height: originalHeight } = await image.decoded;
+  const aspectRatio = originalHeight / originalWidth;
+  const height = width * aspectRatio;
 
   // Pre-process
   const preprocessOptions = {
@@ -60,12 +65,10 @@ async function processImagesInDirectory(inputDir, outputDir, width, height) {
 // Example usage: process all images in the 'input' directory and save them in the 'output' directory
 const inputDirectory = __dirname + "/input";
 const outputDirectory = __dirname + "/output";
-const resizeWidth = 150;
-const resizeHeight = 150;
+const resizeWidth = 300;
 
 processImagesInDirectory(
   inputDirectory,
   outputDirectory,
   resizeWidth,
-  resizeHeight
 );
