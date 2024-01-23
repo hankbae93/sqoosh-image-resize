@@ -4,9 +4,6 @@ https://github.com/GoogleChromeLabs/squoosh
 squoosh App에서 제공하는 라이브러리로 한번에 많은 이미지를 돌립시다. 
 
 
-```bash
-npm run resize
-```
 
 1. input 폴더에 변경할 이미지들을 담습니다.
 
@@ -34,5 +31,16 @@ processImagesInDirectory(
   resizeWidth,
   resizeHeight
 );
+```
+
+3. 스크립트 실행 후 output 폴더를 확인해서 가져갑니다.
+```json
+"scripts": {
+  "resize": "node --max-old-space-size=4096 index.js"
+},
+```
+
+```bash
+npm run resize
 ```
 
